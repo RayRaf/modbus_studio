@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Генератор карты Modbus адресов</title>
+</head>
+<body>
+    <h1>Список устройств</h1>
+
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Добавить устройство</button>
+    </form>
+
+    <h2>Добавленные устройства</h2>
+    <ul>
+        {% for device in devices %}
+            <li>{{ device.tag }} - {{ device.name }} ({{ device.param_type }})</li>
+        {% empty %}
+            <li>Устройств пока нет.</li>
+        {% endfor %}
+    </ul>
+
+    <a href="{% url 'generate_report' %}">Сформировать отчет</a>
+</body>
+</html>
